@@ -1,23 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component,useContext, useEffect, useState } from 'react'
 import MessageService from '../services/MessageService'
+import { useLocation, useNavigate } from "react-router-dom";
+import { useParams } from 'react-router';
 
-class ViewMessageComponent extends Component {
-    constructor(props) {
-        super(props)
+const ViewMessageComponent = () => {
+    const navigate = useNavigate();
+    
+  const useQuery = () => {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  const query = useQuery();
 
-        this.state = {
-            id: this.props.match.params.id,
-            Message: {}
-        }
-    }
+    const [id, setId] = useState("");
+    const [Message, setMessage] = useState({});
+    const params= useParams()
 
-    componentDidMount(){
-        MessageService.getMessageById(this.state.id).then( res => {
-            this.setState({Message: res.data});
+       
+    useEffect(() => {
+       
+
+        MessageService.getMessageById(params.id).then( res => {
+            setMessage(res.data[0]);
         })
-    }
+      
+          }, []);
 
-    render() {
+
+ 
         return (
             <div>
                 <br></br>
@@ -26,15 +36,19 @@ class ViewMessageComponent extends Component {
                     <div className = "card-body">
                         <div className = "row">
                             <label> Message Title: </label>
-                            <div> { this.state.Message.title }</div>
+                            <div> { Message.title }</div>
                         </div>
                         <div className = "row">
                             <label> Message Description: </label>
-                            <div> { this.state.Message.description }</div>
+                            <div> { Message.description }</div>
                         </div>
                         <div className = "row">
                             <label> Message Link: </label>
-                            <div> { this.state.Message.link }</div>
+                            <div> { Message.link }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Message Status: </label>
+                            <div> { Message.status }</div>
                         </div>
                     </div>
 
@@ -42,6 +56,6 @@ class ViewMessageComponent extends Component {
             </div>
         )
     }
-}
+
 
 export default ViewMessageComponent

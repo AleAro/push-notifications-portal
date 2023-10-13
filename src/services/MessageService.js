@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const Message_API_BASE_URL = "https://onyni7ymnl.execute-api.us-east-2.amazonaws.com/nDev/pushNotifications/messages";
+const Message_API_BASE_URL = "https://onyni7ymnl.execute-api.us-east-2.amazonaws.com/nDev/pushNotifications";
 
 class MessageService {
 
     getMessages(){
+        console.log("getting messages")
         return axios.get(Message_API_BASE_URL);
     }
 

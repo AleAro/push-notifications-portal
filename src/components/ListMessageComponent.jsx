@@ -1,46 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component,useContext, useEffect, useState } from 'react'
 import MessageService from '../services/MessageService'
+import { useNavigate } from "react-router-dom";
 
-class ListMessageComponent extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-                Messages: []
-        }
-        this.addMessage = this.addMessage.bind(this);
-        this.editMessage = this.editMessage.bind(this);
-        this.deleteMessage = this.deleteMessage.bind(this);
-    }
 
-    deleteMessage(id){
+
+const ListMessageComponent = () => {
+
+    const [Messages, setMessages] = useState([]);
+    const navigate = useNavigate();
+
+
+  function  deleteMessage(id){
         MessageService.deleteMessage(id).then( res => {
-            this.setState({Messages: this.state.Messages.filter(Message => Message.id !== id)});
+           setMessages(Messages.filter(Message => Message.id !== id))
         });
     }
-    viewMessage(id){
-        this.props.history.push(`/view-Message/${id}`);
+ function   viewMessage(id){
+     
+        navigate(`/view-Message/${id}`);
     }
-    editMessage(id){
-        this.props.history.push(`/add-Message/${id}`);
+  function  editMessage(id){
+       
+        navigate(`/add-Message/${id}`);
     }
 
-    componentDidMount(){
+    useEffect(() => {
         MessageService.getMessages().then((res) => {
-            this.setState({ Messages: res.data});
+            setMessages(res.data)
+         
         });
+      }, []);
+
+    
+
+    function addMessage(){
+    
+        navigate("/add-Message/_add");
     }
 
-    addMessage(){
-        this.props.history.push('/add-Message/_add');
-    }
 
-    render() {
         return (
             <div>
                  <h2 className="text-center">Messages List</h2>
                  <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addMessage}> Add Message</button>
+                    <button className="btn btn-primary" onClick={addMessage}> Add Message</button>
                  </div>
                  <br></br>
                  <div className = "row">
@@ -51,21 +55,23 @@ class ListMessageComponent extends Component {
                                     <th> Message Title</th>
                                     <th> Message Description</th>
                                     <th> Message Link</th>
+                                    <th> Message Status</th>
                                     <th> Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    this.state.Messages.map(
+                                    Messages.map(
                                         Message => 
                                         <tr key = {Message.id}>
                                              <td> { Message.title} </td>   
                                              <td> {Message.description}</td>
                                              <td> {Message.link}</td>
+                                             <td> {Message.status}</td>
                                              <td>
-                                                 <button onClick={ () => this.editMessage(Message.id)} className="btn btn-info">Update </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteMessage(Message.id)} className="btn btn-danger">Delete </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewMessage(Message.id)} className="btn btn-info">View </button>
+                                                 <button onClick={() =>{ editMessage(Message.id)}} className="btn btn-info">Update </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={() =>{  deleteMessage(Message.id)}} className="btn btn-danger">Delete </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={() =>{  viewMessage(Message.id)}} className="btn btn-info">View </button>
                                              </td>
                                         </tr>
                                     )
@@ -78,6 +84,6 @@ class ListMessageComponent extends Component {
             </div>
         )
     }
-}
+
 
 export default ListMessageComponent
