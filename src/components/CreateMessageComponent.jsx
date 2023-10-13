@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 
 
 const CreateMessageComponent = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     
   const useQuery = () => {
     const { search } = useLocation();
@@ -21,7 +21,8 @@ const CreateMessageComponent = () => {
     const [link, setLink] = useState("");
    
     const params= useParams()
-/*
+
+        /*
         this.state = {
        
             id: this.props.match.params.id,
@@ -30,7 +31,6 @@ const CreateMessageComponent = () => {
             description: '',
             link: ''
         }
-
         */
    
         useEffect(() => {
