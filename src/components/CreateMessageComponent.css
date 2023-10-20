@@ -1,0 +1,54 @@
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #233161;
+}
+
+.message-card {
+    width: 60%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-title {
+    text-align: center;
+    color: #233161;
+    margin-bottom: 20px;
+}
+
+.btn-success {
+    background-color: #233161;
+    border: none;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    background-color: red;
+    border: none;
+}
+
+.form-group label {
+    color: #233161;
+}
+
+.form-group input {
+    border: 1px solid #233161;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}

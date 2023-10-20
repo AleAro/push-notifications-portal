@@ -2,6 +2,7 @@ import React, { Component,useContext, useEffect, useState } from 'react'
 import MessageService from '../services/MessageService';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from 'react-router';
+import './CreateMessageComponent.css';
 
 
 
@@ -19,22 +20,12 @@ const CreateMessageComponent = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
+    const [users, setusers] = useState("*");
    
     const params= useParams()
-
-        /*
-        this.state = {
-       
-            id: this.props.match.params.id,
-            status: '',
-            title: '',
-            description: '',
-            link: ''
-        }
-        */
    
         useEffect(() => {
-        // step 4
+
         if(params.id === '_add'){
             return
         }else{
@@ -44,11 +35,18 @@ const CreateMessageComponent = () => {
                 let Message = res.data[0];
                 console.log("K")
                 console.log(Message.title)
+                console.log(Message.status)
+                console.log(Message.description)
+                console.log(Message.link)
+                console.log(Message.users)
                 
                 setTitle(Message.title)
                 setStatus(Message.status)
                 setDescription( Message.description)
                 setLink( Message.link)
+                setStatus( Message.status)
+                setusers( Message.users)
+
               
             });
         }    
@@ -57,7 +55,7 @@ const CreateMessageComponent = () => {
  
     function saveOrUpdateMessage (e)  {
         e.preventDefault();
-        let Message = {title: title, status: status, description: description, link: link};
+        let Message = {title: title, status: status, description: description, link: link, users: users};
         console.log('Message => ' + JSON.stringify(Message));
 
         // step 5
@@ -89,6 +87,10 @@ const CreateMessageComponent = () => {
         setStatus(event.target.value);
     }
 
+    function  changeusersHandler (event)  {
+        setusers(event.target.value);
+    }
+
    function  cancel(){
     navigate('/Messages')
        
@@ -105,14 +107,15 @@ const CreateMessageComponent = () => {
         return (
             <div>
                 <br></br>
-                   <div className = "container">
-                        <div className = "row">
-                            <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                {
-                                    gettitle
-                                }
-                                <div className = "card-body">
+                <div className="message-container">
+            <div className="message-card">
+                <h3 className="message-title">{gettitle}</h3>
                                     <form>
+                                    <div className = "form-group">
+                                            <label> users: </label>
+                                             <input placeholder="users" name="users" className="form-control"
+                                             value={users} />
+                                    </div>
                                         <div className = "form-group">
                                             <label> Titulo: </label>
                                             <input placeholder="Titulo" name="title" className="form-control" 
@@ -130,7 +133,7 @@ const CreateMessageComponent = () => {
                                         </div>
                                         <div className = "form-group">
                                             <label> Status: </label>
-                                            <input placeholder="Link" name="link" className="form-control" 
+                                            <input placeholder="Status" name="status" className="form-control" 
                                                 value={status} onChange={changeStatusHandler}/>
                                         </div>
 
@@ -141,8 +144,7 @@ const CreateMessageComponent = () => {
                             </div>
                         </div>
 
-                   </div>
-            </div>
+              
         )
     
 }

@@ -1,0 +1,84 @@
+/* ListMessageComponent.css */
+
+.text-center {
+    color: #233161;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    background-color: #233161;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message-list-container {
+    margin: 0 20px;  /* Added margin to the sides */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;  /* Rounded corners for table */
+    overflow: hidden;  /* Ensures the content inside the table doesn't bleed outside the border-radius */
+}
+
+.table, .table th, .table td {
+    border: 1px solid #233161;
+    padding: 10px;
+}
+
+.table th {
+    background-color: #233161;
+    color: white;
+    text-align: left;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(35, 49, 97, 0.05);
+}
+
+.btn btn-primary{
+    background-color: #233161;
+}
+
+.my-blue-btn {
+    background-color: #233161; 
+    color: #233161;
+    border: none;
+}
+
+.btn-info {
+    background-color: #233161;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.button-row {
+    margin-bottom: 20px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}

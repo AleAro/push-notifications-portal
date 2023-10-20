@@ -1,6 +1,7 @@
 import React, { Component,useContext, useEffect, useState } from 'react'
 import MessageService from '../services/MessageService'
 import { useNavigate } from "react-router-dom";
+import './ListMessageComponent.css';
 
 
 
@@ -41,17 +42,17 @@ const ListMessageComponent = () => {
 
 
         return (
-            <div>
-                 <h2 className="text-center">Messages List</h2>
-                 <div className = "row">
-                    <button className="btn btn-primary" onClick={addMessage}> Add Message</button>
-                 </div>
-                 <br></br>
-                 <div className = "row">
+            <div className="message-list-container">
+            <h2 className="text-center">Push Notifications</h2>
+            <div className="row button-row">
+                <button className="btn my-blue-btn" onClick={addMessage}> Add Message</button>
+            </div>
+            <div className="row table-row">
                         <table className = "table table-striped table-bordered">
 
                             <thead>
                                 <tr>
+                                    <th>Message Reciever</th>
                                     <th> Message Title</th>
                                     <th> Message Description</th>
                                     <th> Message Link</th>
@@ -64,14 +65,15 @@ const ListMessageComponent = () => {
                                     Messages.map(
                                         Message => 
                                         <tr key = {Message.id}>
+                                                <td> { Message.reciever} </td>
                                              <td> { Message.title} </td>   
                                              <td> {Message.description}</td>
                                              <td> {Message.link}</td>
                                              <td> {Message.status}</td>
                                              <td>
-                                                 <button onClick={() =>{ editMessage(Message.id)}} className="btn btn-info">Update </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={() =>{  deleteMessage(Message.id)}} className="btn btn-danger">Delete </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={() =>{  viewMessage(Message.id)}} className="btn btn-info">View </button>
+                                                 <button onClick={() =>{ editMessage(Message.id)}} className="btn my-blue-btn">Update </button>
+                                                 <button style={{marginLeft: "8px"}} onClick={() =>{  deleteMessage(Message.id)}} className="btn btn-danger">Delete </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={() =>{  viewMessage(Message.id)}} className="btn my-blue-btn">View </button>
                                              </td>
                                         </tr>
                                     )
@@ -82,6 +84,8 @@ const ListMessageComponent = () => {
                  </div>
 
             </div>
+            
+
         )
     }
 
