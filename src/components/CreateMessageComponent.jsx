@@ -55,7 +55,8 @@ const CreateMessageComponent = () => {
  
     function saveOrUpdateMessage (e)  {
         e.preventDefault();
-        let Message = {title: title, status: status, description: description, link: link, users: users};
+     //   let Message = {title: title, status: status, description: description, link: link, users: users};
+        let Message = {title: title, status: status, description: description, link: link};
         console.log('Message => ' + JSON.stringify(Message));
 
         // step 5
